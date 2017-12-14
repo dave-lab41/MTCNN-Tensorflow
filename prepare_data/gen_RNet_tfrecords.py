@@ -8,6 +8,10 @@ import tensorflow as tf
 
 from tfrecord_utils import _process_image_withoutcoder, _convert_to_example_simple
 
+# Set up globals to run through all four options
+OPTIONS = ['pos','neg','part','landmark']
+INDEX = 0 
+
 
 def _add_to_tfrecord(filename, image_example, tfrecord_writer):
     """Loads data from image and annotations files and add them to a TFRecord.
@@ -31,7 +35,9 @@ def _get_output_filename(output_dir, name, net):
     #st = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
     #return '%s/%s_%s_%s.tfrecord' % (output_dir, name, net, st)
     #return '%s/train_PNet_landmark.tfrecord' % (output_dir)
-    return '%s/landmark_landmark.tfrecord' % (output_dir)
+    
+    #return '%s/landmark_landmark.tfrecord' % (output_dir)
+    return output_dir + '/' + OPTIONS[INDEX] + '_landmark.tfrecord'
     
 
 def run(dataset_dir, net, output_dir, name='MTCNN', shuffling=False):
@@ -56,7 +62,7 @@ def run(dataset_dir, net, output_dir, name='MTCNN', shuffling=False):
         random.shuffle(dataset)
     # Process dataset files.
     # write the data to tfrecord
-    print 'lala'
+    #print 'lala'
     with tf.python_io.TFRecordWriter(tf_filename) as tfrecord_writer:
         for i, image_example in enumerate(dataset):
             sys.stdout.write('\r>> Converting image %d/%d' % (i + 1, len(dataset)))
@@ -67,13 +73,16 @@ def run(dataset_dir, net, output_dir, name='MTCNN', shuffling=False):
     # Finally, write the labels file:
     # labels_to_class_names = dict(zip(range(len(_CLASS_NAMES)), _CLASS_NAMES))
     # dataset_utils.write_label_file(labels_to_class_names, dataset_dir)
-    print('\nFinished converting the MTCNN dataset!')
+    #print('\nFinished converting the MTCNN dataset!')
 
 
-def get_dataset(dir, net='PNet'):
+def get_dataset(dir, net='RNet'):
     #item = 'imglists/PNet/train_%s_raw.txt' % net
     #item = 'imglists/PNet/train_%s_landmark.txt' % net
-    item = '%s/landmark_%s_aug.txt' % (net,net)
+   
+    item = net + '/' + OPTIONS[INDEX] + '_' + net + '.txt' 
+    #item = net + '/' + OPTIONS[INDEX] + '_' + net + '_aug.txt' 
+    # item = '%s/landmark_%s_aug.txt' % (net,net)
     print item 
     dataset_dir = os.path.join(dir, item)
     imagelist = open(dataset_dir, 'r')
@@ -126,4 +135,9 @@ if __name__ == '__main__':
     dir = '.' 
     net = '24'
     output_directory = 'imglists/RNet'
-    run(dir, net, output_directory, shuffling=True)
+    # Go through all of the global variable OPTIONS
+    for option in OPTIONS:
+        print("Running {0} option".format(OPTIONS[INDEX]))
+        run(dir, net, output_directory, shuffling=True)
+        INDEX+=1
+    print("Done")

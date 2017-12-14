@@ -7,7 +7,7 @@ import argparse
 import os
 import cPickle as pickle
 import cv2
-from train_models.mtcnn_model import P_Net,R_Net
+from train_models.mtcnn_model import P_Net,R_Net,O_Net
 from train_models.MTCNN_config import config
 from loader import TestLoader
 from Detection.detector import Detector
@@ -123,7 +123,7 @@ def save_hard_example(net, data,save_path):
 
 
 def t_net(prefix, epoch,
-             batch_size, test_mode="PNet",
+             batch_size, test_mode="RNet",
              thresh=[0.6, 0.6, 0.7], min_face_size=25,
              stride=2, slide_window=False, shuffle=False, vis=False):
     detectors = [None, None, None]
@@ -179,7 +179,7 @@ def t_net(prefix, epoch,
     save_file = os.path.join(save_path, "detections.pkl")
     with open(save_file, 'wb') as f:
         pickle.dump(detections, f,1)
-    print("%s测试完成开始OHEM" % image_size)
+    #print("%s测试完成开始OHEM" % image_size)
     save_hard_example(image_size, data, save_path)
 
 
@@ -189,10 +189,10 @@ def parse_args():
     parser.add_argument('--test_mode', dest='test_mode', help='test net type, can be pnet, rnet or onet',
                         default='RNet', type=str)
     parser.add_argument('--prefix', dest='prefix', help='prefix of model name', nargs="+",
-                        default=['../data/MTCNN_model/PNet_landmark/PNet', '../data/MTCNN_model/RNet_landmark/RNet', '../data/MTCNN_model/ONet/ONet'],
+                        default=['../data/MTCNN_model/PNet_landmark/PNet', '../data/MTCNN_model/RNet_landmark/RNet', '../data/MTCNN_model/ONet_landmark/ONet'],
                         type=str)
     parser.add_argument('--epoch', dest='epoch', help='epoch number of model to load', nargs="+",
-                        default=[18, 14, 22], type=int)
+                        default=[30, 22, 16], type=int)
     parser.add_argument('--batch_size', dest='batch_size', help='list of batch size used in prediction', nargs="+",
                         default=[2048, 256, 16], type=int)
     parser.add_argument('--thresh', dest='thresh', help='list of thresh for pnet, rnet, onet', nargs="+",
@@ -212,27 +212,32 @@ def parse_args():
 
 if __name__ == '__main__':
 
-    net = 'ONet'
-    if net == "RNet":
-        image_size = 24
-    if net == "ONet":
-        image_size = 48
+    args = parse_args()
 
-    base_dir = '../prepare_data/WIDER_train'
+    if args.test_mode == "PNet":
+        image_size = 24
+    elif args.test_mode == "RNet":
+        image_size = 48
+    else:
+        print("Test mode parameter was set as {0} and must be PNet or RNet; quitting".format(args.test_mode))
+        quit()
+
+    #base_dir = '../prepare_data/WIDER_train'
+    base_dir = '/mtcnn_training_data/WIDER_train'
     data_dir = '%s' % str(image_size)
-    
+
     neg_dir = get_path(data_dir, 'negative')
     pos_dir = get_path(data_dir, 'positive')
     part_dir = get_path(data_dir, 'part')
-    #create dictionary shuffle   
+    #create dictionary shuffle
     for dir_path in [neg_dir, pos_dir, part_dir]:
-        if not os.path.exists(dir_path):
-            os.makedirs(dir_path)
+          if not os.path.exists(dir_path):
+                  os.makedirs(dir_path)
 
-    args = parse_args()
+    #args = parse_args()
 
     print 'Called with argument:'
-    print args 
+    print args
     t_net(args.prefix,#model param's file
           args.epoch, #final epoches
           args.batch_size, #test batch_size 
@@ -240,6 +245,7 @@ if __name__ == '__main__':
           args.thresh, #cls threshold
           args.min_face, #min_face
           args.stride,#stride
-          args.slide_window, 
-          args.shuffle, 
+          args.slide_window,
+          args.shuffle,
           vis=False)
+

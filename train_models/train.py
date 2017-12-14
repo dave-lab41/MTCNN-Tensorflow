@@ -12,6 +12,8 @@ from mtcnn_model import P_Net
 import random
 import numpy.random as npr
 import cv2
+
+
 def train_model(base_lr, loss, data_num):
     """
     train model
@@ -160,7 +162,8 @@ def train(net_factory, prefix, end_epoch, base_dir,
     summary_op = tf.summary.merge_all()
     logs_dir = "../logs/%s" %(net)
     if os.path.exists(logs_dir) == False:
-        os.mkdir(logs_dir)
+        os.makedirs(logs_dir)
+        #os.mkdir(logs_dir)
     writer = tf.summary.FileWriter(logs_dir,sess.graph)
     #begin 
     coord = tf.train.Coordinator()

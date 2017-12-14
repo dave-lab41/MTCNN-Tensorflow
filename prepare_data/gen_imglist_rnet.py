@@ -2,7 +2,7 @@ import numpy as np
 import numpy.random as npr
 import os
 
-data_dir = '.'
+data_dir = '/prog/prepare_data'
 #anno_file = os.path.join(data_dir, "anno.txt")
 
 size = 24
@@ -23,7 +23,7 @@ with open(os.path.join(data_dir, '%s/neg_%s.txt' % (size, size)), 'r') as f:
 with open(os.path.join(data_dir, '%s/part_%s.txt' % (size, size)), 'r') as f:
     part = f.readlines()
 
-with open(os.path.join(data_dir, '%s/landmark_%s_aug.txt' % (size, size)), 'r') as f:
+with open(os.path.join(data_dir, '%s/landmark_%s.txt' % (size, size)), 'r') as f:
     landmark = f.readlines()
   
 dir_path = os.path.join(data_dir, 'imglists',"RNet")

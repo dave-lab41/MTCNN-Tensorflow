@@ -29,7 +29,8 @@ def read_annotation(base_dir, label_path):
         imagepath = labelfile.readline().strip('\n')
         if not imagepath:
             break
-        imagepath = base_dir + '/WIDER_train/images/' + imagepath
+        #imagepath = base_dir + '/WIDER_train/images/' + imagepath
+        imagepath = '/mtcnn_training_data/WIDER_train/images/' + imagepath
         images.append(imagepath)
         # face numbers
         nums = labelfile.readline().strip('\n')
@@ -74,7 +75,8 @@ def read_and_write_annotation(base_dir, dir):
         imagepath = labelfile.readline().strip('\n')
         if not imagepath:
             break
-        imagepath = base_dir + '/WIDER_train/images/' + imagepath
+        #imagepath = base_dir + '/WIDER_train/images/' + imagepath
+        imagepath = '/mtcnn_training_data' + imagepath
         images.append(imagepath)
         # face numbers
         nums = labelfile.readline().strip('\n')
