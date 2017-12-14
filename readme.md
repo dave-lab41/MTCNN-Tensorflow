@@ -8,7 +8,7 @@
 
 2. Download and unzip WIDER Face training data (http://mmlab.ie.cuhk.edu.hk/projects/WIDERFace/) to a folder on your computer 
 
-3. Download and unzip Facial Point Detection training data (http://mmlab.ie.cuhk.edu.hk/archive/CNN/data/train.zip) or Celeba training data (http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) to same folder on your computer as used in step #2 above.
+3. Download and unzip Facial Point Detection training data (http://mmlab.ie.cuhk.edu.hk/archive/CNN/data/train.zip) to same folder on your computer as used in step #2 above.
 
 Your unzipped training data folder should look like:
 ```
@@ -19,6 +19,8 @@ Your unzipped training data folder should look like:
    - trainImageList.txt
    + WIDER_train
 ```
+
+Another option choose to use the Celeba training data (http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html). 
 
 4. Build container
 ```
