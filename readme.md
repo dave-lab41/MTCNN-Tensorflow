@@ -20,7 +20,7 @@ Your unzipped training data folder should look like:
    + WIDER_train
 ```
 
-(Optional) Another option is to use the Celeba training data (http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html). 
+(Optional) The Celeba training data (http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) should also work as an alternative. 
 
 4. Build container
 ```
