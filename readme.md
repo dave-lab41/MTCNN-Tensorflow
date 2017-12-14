@@ -10,6 +10,16 @@
 
 3. Download and unzip Facial Point Detection training data (http://mmlab.ie.cuhk.edu.hk/archive/CNN/data/train.zip) or Celeba training data (http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) to same folder on your computer as used in step #2 above.
 
+Your unzipped training data folder should look like:
+```
+/path/to/your/unzipped_training_data/
+   + lfw_5590
+   + net_7876
+   - testImageList.txt
+   - trainImageList.txt
+   + WIDER_train
+```
+
 4. Build container
 ```
 docker build -f Dockerfile.mtcnn_train -t vfs.mtcnn_train .
