@@ -1,4 +1,4 @@
-# Experiment to Train Multi-Task CNN to detect faces. 
+# Experiment to Train Multi-Task CNN to detect faces 
 
 <img src="assets/afghan.jpg" width=730 height=410 alt="Face detection example" />
 
