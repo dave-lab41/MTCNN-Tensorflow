@@ -98,10 +98,10 @@ python gen_imglist_onet.py
 python gen_ONet_tfrecords.py
 ```
 
-15. Run train_RNet.py in the train_models folder to train RNet.
+15. Run train_ONet.py in the train_models folder to train ONet.
 ```
 cd /prog/train_models
-python train_RNet.py
+python train_ONet.py
 ```
 
 16. Test trained model on test images
