@@ -1,4 +1,4 @@
-# Experiment to Train Multi-Task CNN to detect faces. GPU is required.
+# Experiment to Train Multi-Task CNN to detect faces. 
 
 <img src="assets/afghan.jpg" width=730 height=410 alt="Face detection example" />
 
@@ -22,11 +22,11 @@ Your unzipped training data folder should look like:
 
 (Optional) The Celeba training data (http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) should also work as an alternative. 
 
-4. Build container
+4. Build Docker container
 ```
 docker build -f Dockerfile.mtcnn_train -t vfs.mtcnn_train .
 ```
-5. Run container
+5. Run Docker container with GPU support
 ```
 nvidia-docker run -v /path/to/your/unzipped_training_data:/mtcnn_training_data vfs.mtcnn_train
 ```
