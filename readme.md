@@ -6,9 +6,9 @@
 
 1. Git clone repository
 
-2. Download and unzip WIDER Face training data (http://mmlab.ie.cuhk.edu.hk/projects/WIDERFace/) to a folder on your computer 
+2. Download and unzip [WIDER Face](http://mmlab.ie.cuhk.edu.hk/projects/WIDERFace/) training data to a folder on your computer 
 
-3. Download and unzip Facial Point Detection training data (http://mmlab.ie.cuhk.edu.hk/archive/CNN/data/train.zip) to same folder on your computer as used in step #2 above.
+3. Download and unzip Facial Point Detection [training data](http://mmlab.ie.cuhk.edu.hk/archive/CNN/data/train.zip) to same folder on your computer as used in step #2 above.
 
 Your unzipped training data folder should look like:
 ```
@@ -20,7 +20,7 @@ Your unzipped training data folder should look like:
    + WIDER_train
 ```
 
-(Optional) The Celeba training data (http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) should also work as an alternative. 
+(Optional) The [Celeba](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) training data should also work for training MTCNN. 
 
 4. Build Docker container
 ```
